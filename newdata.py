@@ -16,8 +16,8 @@ import pandas as pd
 import pyodbc
 
 # Step 1: Load data from the Excel file
-excel_file = r'C:\Users\malle\Downloads\SampleSuperstorepeople.xlsx'  # Use .xlsx file
-sheet_name = 'People'  # Adjust this to your specific sheet name
+excel_file = r'C:\Users\malle\Downloads\SampleSuperstoreOrders.xlsx'  # Use .xlsx file
+sheet_name = 'Orders'  # Adjust this to your specific sheet name
 df = pd.read_excel(excel_file, sheet_name=sheet_name, engine='openpyxl')
 
 # Define the SQL Server connection using Windows Authentication
@@ -33,7 +33,7 @@ conn = pyodbc.connect(conn_str)
 cursor = conn.cursor()
 
 # Step 2: Create a table in SQL Server
-table_name = 'People'  # Replace with your desired table name
+table_name = 'Orders'  # Replace with your desired table name
 
 # Drop table if no need
 """drop_table_sql = f"IF OBJECT_ID('{table_name}', 'U') IS NOT NULL DROP TABLE [{table_name}]"
@@ -103,7 +103,7 @@ conn.commit()
 new_df.iloc[0:0].to_excel(excel_file, sheet_name=sheet_name, index=False)
 
 # Step 9: Export the data from SQL Server into a different Excel file
-output_excel_file = r'C:\\Users\\malle\\Downloads\\output_excel_filemyteam.xlsx'
+output_excel_file = r'C:\\Users\\malle\\Downloads\\output_excel_fileget.xlsx'
 df_from_sql = pd.read_sql(f"SELECT * FROM [{table_name}]", conn)
 df_from_sql.to_excel(output_excel_file, index=False)
 
