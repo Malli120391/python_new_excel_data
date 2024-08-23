@@ -16,7 +16,7 @@ import pandas as pd
 import pyodbc
 
 # Step 1: Load data from the Excel file
-excel_file = r'C:\Users\malle\Downloads\SampleSuperstorepeople.xlsx'  # Use .xlsx file
+excel_file = r'C:\Users\malle\Downloads\SampleSuperstoreinsert.xlsx'  # Use .xlsx file
 sheet_name = 'People'  # Adjust this to your specific sheet name
 df = pd.read_excel(excel_file, sheet_name=sheet_name, engine='openpyxl')
 
@@ -49,6 +49,7 @@ finally:
     cursor.close()
     conn.close()"""
 
+
 # Define data type mapping
 def infer_sql_type(dtype):
     if pd.api.types.is_integer_dtype(dtype):
@@ -61,6 +62,7 @@ def infer_sql_type(dtype):
         return 'BIT'
     else:
         return 'NVARCHAR(MAX)'
+
 
 # Generate a SQL CREATE TABLE statement based on the DataFrame
 columns = ", ".join([f"[{col}] {infer_sql_type(df[col].dtype)}" for col in df.columns])
@@ -103,7 +105,7 @@ conn.commit()
 new_df.iloc[0:0].to_excel(excel_file, sheet_name=sheet_name, index=False)
 
 # Step 9: Export the data from SQL Server into a different Excel file
-output_excel_file = r'C:\\Users\\malle\\Downloads\\output_excel_filemyteam.xlsx'
+output_excel_file = r'C:\Users\malle\Downloads\SampleSuperstoreinst.xlsx'
 df_from_sql = pd.read_sql(f"SELECT * FROM [{table_name}]", conn)
 df_from_sql.to_excel(output_excel_file, index=False)
 

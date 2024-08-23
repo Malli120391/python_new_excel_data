@@ -21,8 +21,8 @@ connection_string = f'mssql+pyodbc://@{server}/{database}?driver=ODBC+Driver+17+
 engine = create_engine(connection_string)
 
 # File paths
-input_file = r'C:\Users\malle\Downloads\SampleSuperstorekm.xlsx'
-export_file = r'C:\Users\malle\Downloads\output_excel_filethree.xlsx'
+input_file = r'C:\Users\malle\Downloads\SampleSuperstoretech.xlsx'
+export_file = r'C:\Users\malle\Downloads\output_excel_filett.xlsx'
 
 
 def process_excel_file():
